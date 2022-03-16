@@ -36,9 +36,9 @@ Inp_Com:
     mov ax,cs
     mov ds,ax
     mov es,ax
-    mov di,STR
+    mov di,ramem
     push si
-    mov si,WRIT
+    mov si,comm
     mov cx,5
     rep cmpsb
     je wrt

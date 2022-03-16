@@ -57,4 +57,4 @@ SetCP:
         Con db 'Press Enter to Continue',0
   
 times(510-($-$$)) db 0
-db 55AAh
+db 055h,0AAh
