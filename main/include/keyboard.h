@@ -1,16 +1,9 @@
-/*
-    Copyright (C) Aren Elchinyan 2021-2022. All rights reserved.
-    Distributed under terms of the Creative Commons Zero v1.0 Universal License.
-*/
-
-
-
 #include <stdint.h>
 #include <stddef.h>
 #include <libk/string.h>
 #include <libk/stdlib.h>
-#include <io/tty.h>
-#include <io/ports.h>
+#include <tty.h>
+#include <ports.h>
 #ifndef KBD_H
 #define KBD_H
 
