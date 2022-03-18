@@ -14,7 +14,7 @@ ____
 ____
  
 ### Сборка.
- Для сборки вам потребуется скачать `NASM` с официального сайта `https://nasm.us`
+ Для сборки вам потребуется скачать `NASM` с официального сайта nasm.us
 * Затем,
   * `Win32`:
    * Запустить `build.bat`
@@ -23,9 +23,9 @@ ____
 ____
 
 ### Благодарности.
- + `https://vk.com/0nera`
+ + https://vk.com/0nera
  + Пока-что всё...
 
 ### Контакты для связи.
- * ВКонтакте: `https://vk.com/11clementine11`
- * E-Mail: `clementine11@vk.com`
+ * ВКонтакте: https://vk.com/11clementine11
+ * E-Mail: clementine11@vk.com
