@@ -1,3 +1,8 @@
+; This is the kernel's entry point. We could either call main here,
+; or we can use this to setup the stack or other nice stuff, like
+; perhaps setting up the GDT and segments. Please note that interrupts
+; are disabled at this point: More on interrupts later!
+[BITS 32]
 global start
 start:
     mov esp, _sys_stack     ; This points the stack to our new stack area
@@ -52,3 +57,5 @@ stublet:
 SECTION .bss
     resb 8192               ; This reserves 8KBytes of memory here
 _sys_stack:
+
+		
