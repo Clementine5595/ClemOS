@@ -1,4 +1,4 @@
-# ClemOS on FASM and C
+# ClemOS on NASM and C
  Оглавление:
  ##### 1. Что это такое?
  ##### 2. Сборка.
@@ -10,22 +10,22 @@ ____
  - Полное название данной ОС: `ClemOS`
  - Разрядность: `x86`
  - Ядро: `Модульное`
- - Ядро написано на языке FASM.
+ - Ядро написано на языке `NASM`.
 ____
  
 ### Сборка.
- Для сборки вам потребуется скачать FASM с официального сайта https://flatassembler.net/download.php
+ Для сборки вам потребуется скачать `NASM` с официального сайта `https://nasm.us`
 * Затем,
-  * Win32:
+  * `Win32`:
    * Запустить `build.bat`
-  * Linux:
+  * `Linux`:
    * Извините, но я временно не пользуюсь им...
 ____
 
 ### Благодарности.
- + https://vk.com/0nera
+ + `https://vk.com/0nera`
  + Пока-что всё...
 
 ### Контакты для связи.
- * ВКонтакте: https://vk.com/11clementine11
- * E-Mail: clementine11@vk.com
+ * ВКонтакте: `https://vk.com/11clementine11`
+ * E-Mail: `clementine11@vk.com`
