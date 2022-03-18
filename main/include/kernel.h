@@ -9,9 +9,6 @@
 
 #include <keyboard.h>
 #include <stdlib.h>
-#include <shell.h>
-
-
 
 void kernel_main();
 extern int alive;
