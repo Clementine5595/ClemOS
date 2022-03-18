@@ -49,7 +49,7 @@ void outportb (unsigned short _port, unsigned char _data)
 
 /* This is a very simple main() function. All it does is sit in an
 *  infinite loop. This will be like our 'idle' loop */
-void main()
+void _main()
 {
     /* You would add commands after here */
 
