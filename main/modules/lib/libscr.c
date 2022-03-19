@@ -1,16 +1,13 @@
-#include < main.h >
+#include <lib/system.h>
 #include <stddef.h>
 #include <stdint.h>
-
 volatile uint16_t* vga_buffer = (uint16_t*)0xB8000;
 const int VGA_COLS = 80;
 const int VGA_ROWS = 25;
-
 int term_col = 0;
 int term_row = 0;
 uint8_t term_color = 0x0F;
 
-/* Scrolls the screen */
 void scroll(void) {
     unsigned blank, temp;
     blank = 0x20 | (term_color << 8);

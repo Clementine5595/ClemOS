@@ -1,6 +1,6 @@
 // GCC provides these header files automatically
 // They give us access to useful things like fixed-width types
-#include <libscr.h>
+#include <lib/libscr.h>
 
 void main()
 {
