@@ -1,4 +1,4 @@
-#include <lib/system.h>
+#include <system.h>
 #include <stddef.h>
 #include <stdint.h>
 volatile uint16_t* vga_buffer = (uint16_t*)0xB8000;
