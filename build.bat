@@ -9,7 +9,7 @@ set GCC=C:\Users\Clementine\Desktop\123321\bin\i686-elf-gcc.exe
 
 echo Now assembling, compiling, and linking your kernel:
 
-%GCC% -std=gnu99 -ffreestanding -g -c %FOL%main.c -o %FOL%bin/main.o
+%GCC% -std=gnu99 -ffreestanding -g -c %FOL%modules/main.c -o %FOL%bin/main.o
 %GCC% -std=gnu99 -ffreestanding -g -c %FOL%modules/lib/libscr.c -o %FOL%bin/libscr.o
 
 %NAS% -f elf32 -o %FOL%bin\start.o %ASM%start.asm
