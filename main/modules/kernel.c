@@ -4,7 +4,7 @@
 
 void main()
 {
-	term_init();
-	term_print("Hello, World!\n");
-	term_print("Welcome to the kernel.\n");
+	init_video();
+	puts("Hello, World!\n");
+	puts("Welcome to the kernel.\n");
 }

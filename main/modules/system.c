@@ -1,4 +1,4 @@
-#include < system.h >
+#include <system.h>
 
 /* You will need to code these up yourself!  */
 unsigned char *memcpy(unsigned char *dest, const unsigned char *src, int count)
