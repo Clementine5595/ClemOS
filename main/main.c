@@ -1,59 +1,101 @@
-#include <main.h>
-
-/* You will need to code these up yourself!  */
-unsigned char *memcpy(unsigned char *dest, const unsigned char *src, int count)
+// GCC provides these header files automatically
+// They give us access to useful things like fixed-width types
+#include <stddef.h>
+#include <stdint.h>
+ 
+// First, let's do some basic checks to make sure we are using our x86-elf cross-compiler correctly
+#if defined(__linux__)
+	#error "This code must be compiled with a cross-compiler"
+#elif !defined(__i386__)
+	#error "This code must be compiled with an x86-elf compiler"
+#endif
+ 
+// This is the x86's VGA textmode buffer. To display text, we write data to this memory location
+volatile uint16_t* vga_buffer = (uint16_t*)0xB8000;
+// By default, the VGA textmode buffer has a size of 80x25 characters
+const int VGA_COLS = 80;
+const int VGA_ROWS = 25;
+ 
+// We start displaying text in the top-left of the screen (column = 0, row = 0)
+int term_col = 0;
+int term_row = 0;
+uint8_t term_color = 0x0F; // Black background, White foreground
+ 
+// This function initiates the terminal by clearing it
+void term_init()
 {
-    /* Add code here to copy 'count' bytes of data from 'src' to
-    *  'dest', finally return 'dest' */
+	// Clear the textmode buffer
+	for (int col = 0; col < VGA_COLS; col ++)
+	{
+		for (int row = 0; row < VGA_ROWS; row ++)
+		{
+			// The VGA textmode buffer has size (VGA_COLS * VGA_ROWS).
+			// Given this, we find an index into the buffer for our character
+			const size_t index = (VGA_COLS * row) + col;
+			// Entries in the VGA buffer take the binary form BBBBFFFFCCCCCCCC, where:
+			// - B is the background color
+			// - F is the foreground color
+			// - C is the ASCII character
+			vga_buffer[index] = ((uint16_t)term_color << 8) | ' '; // Set the character to blank (a space character)
+		}
+	}
 }
-
-unsigned char *memset(unsigned char *dest, unsigned char val, int count)
+ 
+// This function places a single character onto the screen
+void term_putc(char c)
 {
-    /* Add code here to set 'count' bytes in 'dest' to 'val'.
-    *  Again, return 'dest' */
+	// Remember - we don't want to display ALL characters!
+	switch (c)
+	{
+	case '\n': // Newline characters should return the column to 0, and increment the row
+		{
+			term_col = 0;
+			term_row ++;
+			break;
+		}
+ 
+	default: // Normal characters just get displayed and then increment the column
+		{
+			const size_t index = (VGA_COLS * term_row) + term_col; // Like before, calculate the buffer index
+			vga_buffer[index] = ((uint16_t)term_color << 8) | c;
+			term_col ++;
+			break;
+		}
+	}
+ 
+	// What happens if we get past the last column? We need to reset the column to 0, and increment the row to get to a new line
+	if (term_col >= VGA_COLS)
+	{
+		term_col = 0;
+		term_row ++;
+	}
+ 
+	// What happens if we get past the last row? We need to reset both column and row to 0 in order to loop back to the top of the screen
+	if (term_row >= VGA_ROWS)
+	{
+		term_col = 0;
+		term_row = 0;
+	}
 }
-
-unsigned short *memsetw(unsigned short *dest, unsigned short val, int count)
+ 
+// This function prints an entire string onto the screen
+void term_print(const char* str)
 {
-    /* Same as above, but this time, we're working with a 16-bit
-    *  'val' and dest pointer. Your code can be an exact copy of
-    *  the above, provided that your local variables if any, are
-    *  unsigned short */
+	for (size_t i = 0; str[i] != '\0'; i ++) // Keep placing characters until we hit the null-terminating character ('\0')
+		term_putc(str[i]);
 }
-
-int strlen(const char *str)
-{
-    /* This loops through character array 'str', returning how
-    *  many characters it needs to check before it finds a 0.
-    *  In simple words, it returns the length in bytes of a string */
-}
-
-/* We will use this later on for reading from the I/O ports to get data
-*  from devices such as the keyboard. We are using what is called
-*  'inline assembly' in these routines to actually do the work */
-unsigned char inportb (unsigned short _port)
-{
-    unsigned char rv;
-    __asm__ __volatile__ ("inb %1, %0" : "=a" (rv) : "dN" (_port));
-    return rv;
-}
-
-/* We will use this to write to I/O ports to send bytes to devices. This
-*  will be used in the next tutorial for changing the textmode cursor
-*  position. Again, we use some inline assembly for the stuff that simply
-*  cannot be done in C */
-void outportb (unsigned short _port, unsigned char _data)
-{
-    __asm__ __volatile__ ("outb %1, %0" : : "dN" (_port), "a" (_data));
-}
-
-/* This is a very simple main() function. All it does is sit in an
-*  infinite loop. This will be like our 'idle' loop */
+ 
+ 
+ 
+// This is our kernel's main function
 void main()
 {
-    /* You would add commands after here */
-
-    /* ...and leave this loop in. There is an endless loop in
-    *  'start.asm' also, if you accidentally delete this next line */
-    for (;;);
+	// We're here! Let's initiate the terminal and display a message to show we got here.
+ 
+	// Initiate terminal
+	term_init();
+ 
+	// Display some messages
+	term_print("Hello, World!\n");
+	term_print("Welcome to the kernel.\n");
 }
