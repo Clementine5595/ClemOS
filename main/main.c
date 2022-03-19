@@ -1,4 +1,4 @@
-#include <system.h>
+#include <main.h>
 
 /* You will need to code these up yourself!  */
 unsigned char *memcpy(unsigned char *dest, const unsigned char *src, int count)
@@ -49,7 +49,7 @@ void outportb (unsigned short _port, unsigned char _data)
 
 /* This is a very simple main() function. All it does is sit in an
 *  infinite loop. This will be like our 'idle' loop */
-void _main()
+void main()
 {
     /* You would add commands after here */
 
