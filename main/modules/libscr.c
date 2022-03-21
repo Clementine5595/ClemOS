@@ -21,7 +21,7 @@ void scroll(void) {
 
 void move_csr(void) {
     unsigned temp;
-    temp = term_row * 80 + term_col;
+    temp = (term_row * 80) + term_col + 1;
     outportb(0x3D4, 14);
     outportb(0x3D5, temp >> 8);
     outportb(0x3D4, 15);
