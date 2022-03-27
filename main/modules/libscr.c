@@ -1,12 +1,7 @@
 #include <system.h>
 #include <stddef.h>
 #include <stdint.h>
-volatile uint16_t* vga_buffer = (uint16_t*)0xB8000;
-const int VGA_COLS = 80;
-const int VGA_ROWS = 25;
-int term_col = 0;
-int term_row = 0;
-uint8_t term_color = 0x0F;
+#include <video.h>
 
 void scroll(void) {
     unsigned blank, temp;
@@ -75,9 +70,9 @@ void settextcolor(unsigned char forecolor, unsigned char backcolor) {
 }
 
 void init_video() {
-	for (int col = 0; col < VGA_COLS; col ++) {
-		for (int row = 0; row < VGA_ROWS; row ++) {
-			const size_t index = (VGA_COLS * row) + col;
+	for (int col = 0; col < col; col ++) {
+		for (int row = 0; row < row; row ++) {
+			const size_t index = (col * row) + col;
 			vga_buffer[index] = ((uint16_t)term_color << 8) | ' ';
 		}
 	}
