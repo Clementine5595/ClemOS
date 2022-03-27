@@ -1,4 +1,4 @@
-#include < system.h >
+#include <system.h>
 
 /* These define our textpointer, our background and foreground
 *  colors (attributes), and x and y cursor coordinates */
