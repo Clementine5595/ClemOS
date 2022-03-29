@@ -3,7 +3,7 @@
 
 void main()
 {
-	init_video();
-	puts("Hello, World!\n");
-	puts("Welcome to the EBANUYU NEDO OS.\n");
+	clear_screen();
+	putsln("Hello, World!");
+	putsln("Welcome to the NEDO OS.");
 }
